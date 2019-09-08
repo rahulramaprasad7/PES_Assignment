@@ -6,13 +6,13 @@ int main()
 	for( int i = 0; i <(sizeof(input)/sizeof(int)); i++)
 	{
 		if( input[i] >= 65 && input[i] <=90 )                                           		//http://www.asciitable.com/ for checking ASCII range
-			printf("Code: %d	Type:Upper Case 	ASCII Code: %c",input[i],input[i]);
+			printf("Code: %d	Type:Upper Case 	ASCII Code: %c\n",input[i],input[i]);
 		
 		else if( input[i] >= 97 && input[i] <=122 )
-			printf("Code: %d	Type:Lower Case		ASCII Code: %c",input[i],input[i]);
+			printf("Code: %d	Type:Lower Case		ASCII Code: %c\n",input[i],input[i]);
 			
 		else if( input[i] >= 48 && input[i] <=57 )
-			printf("Code: %d	Type:Digit		ASCII Code: %c",input[i],input[i]);
+			printf("Code: %d	Type:Digit		ASCII Code: %c\n",input[i],input[i]);
 		
 	}
 	return 0;
