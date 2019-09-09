@@ -23,6 +23,8 @@ void printAbsHex(void);
 void printSignedBin(void);
 void printSignOnesComp(void);
 void printSignTwosComp(void);
+void printAllOutputs(void);
+
 
 
 int main()
@@ -54,10 +56,29 @@ int main()
 
 	printf("\n");
 
-	value = datastructure[0].value;
-	radix = datastructure[0].radix;
-	opSize = datastructure[0].opSize;
+	for (int i = 0; i < inputQuantity; ++i)
+	{
+		negative = false;
+		operand = 0;
+		min = 0;
+		max = 0;
+		compMins = 0;
 
+		value = datastructure[i].value;
+		radix = datastructure[i].radix;
+		opSize = datastructure[i].opSize;
+		printAllOutputs();
+
+		printf("\n");
+	}
+
+
+	return 0;
+
+}
+
+void printAllOutputs(void)
+{
 	if (value < 0) {
 		negative = true;
 		operand = -1 * value;
@@ -72,6 +93,7 @@ int main()
 	}
 	min = 0;
 
+	//Print Ouptut header
 	printf("Input:  Value %d \t Radix %d \t Operand Size %d\n", value, radix, opSize);
 	printf("Output: \t\tValue \t\tMaximum \tMinimum\n");
 
@@ -103,8 +125,6 @@ int main()
 	printSignOnesComp();
 	printSignTwosComp();
 	printSignedBin();
-
-	return 0;
 }
 
 void printAbsBin(void)
