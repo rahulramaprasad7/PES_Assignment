@@ -12,6 +12,20 @@ bool negative = false;
 int operand = 0, min = 0, max = 0;
 
 void printBIN(int input, int opSize);
+int onesComp(int signedNo, bool neg, int opSize);
+int twosComp(int signedNo, bool neg, int opSize);
+
+// Here is a quick summary of how to find the 1's complement representation of any decimal number x.
+// If x is positive, simply convert x to binary.
+// If x is negative, write the positive value of x in binary
+// Reverse each bit.
+
+// Here is a quick summary of how to find the 2's complement representation of any decimal number x. Notice the first three steps are the same as 1's complement.
+// If x is positive, simply convert x to binary.
+// If x is negative, write the positive value of x in binary
+// Reverse each bit.
+// Add 1 to the complemented number.
+
 
 int main()
 {
@@ -88,10 +102,16 @@ int main()
 
     //converting to signed number
 	if(negative){
-		operand += 1 << (opSize - 1);
+		operand |= 1 << (opSize - 1);
 	}
 
-	printBIN(operand, opSize);
+	// printBIN(operand, opSize);
+	printBIN(onesComp(operand,negative,opSize),opSize);
+	printBIN(twosComp(operand,negative,opSize),opSize);
+
+
+
+	printf("\n");
 
 	return 0;
 }
@@ -104,4 +124,21 @@ void printBIN(int input, int opSize)
 		printf("%d", (input >> i) & 0x01);
 	}
 	printf("\t");	
+}
+
+int onesComp(int signedNo, bool neg, int opSize)
+{
+	if(neg)
+	{
+		signedNo &= ~(1 << (opSize - 1));
+		signedNo = ~signedNo;
+		return signedNo;
+	} else {
+		return ~signedNo;
+	}	
+}
+
+int twosComp(int signedNo, bool neg, int opSize)
+{
+	return (onesComp(signedNo, neg, opSize) + 1);
 }
