@@ -10,22 +10,19 @@ struct a {
 
 bool negative = false;
 int operand = 0, min = 0, max = 0;
+int value,radix,opSize,compMins;
 
-void printBIN(int input, int opSize);
-int onesComp(int signedNo, bool neg, int opSize);
-int twosComp(int signedNo, bool neg, int opSize);
+void convToBin(int input, int opSize);
+int onesComp(int signedNo, int opSize);
+int twosComp(int signedNo, int opSize);
 int toSigned(int unsignedNo, int opSize);
-
-// Here is a quick summary of how to find the 1's complement representation of any decimal number x.
-// If x is positive, simply convert x to binary.
-// If x is negative, write the positive value of x in binary
-// Reverse each bit.
-
-// Here is a quick summary of how to find the 2's complement representation of any decimal number x. Notice the first three steps are the same as 1's complement.
-// If x is positive, simply convert x to binary.
-// If x is negative, write the positive value of x in binary
-// Reverse each bit.
-// Add 1 to the complemented number.
+void printAbsBin(void);
+void printAbsOct(void);
+void printAbsDec(void);
+void printAbsHex(void);
+void printSignedBin(void);
+void printSignOnesComp(void);
+void printSignTwosComp(void);
 
 
 int main()
@@ -57,9 +54,9 @@ int main()
 
 	printf("\n");
 
-	int value = datastructure[0].value;
-	int radix = datastructure[0].radix;
-	int opSize = datastructure[0].opSize;
+	 value = datastructure[0].value;
+	 radix = datastructure[0].radix;
+	 opSize = datastructure[0].opSize;
 
 	if (value < 0) {
 		negative = true;
@@ -68,43 +65,24 @@ int main()
 		operand = value;
 	}
 
-	/* BIN */
-	printBIN(operand, opSize);
-	//max
+	//max & min unsigned
 	for (int i = opSize - 1; i >= 0; i--)
 	{
 		max += (1 << i);
 	}
 	min = 0;
-	printBIN(max, opSize);
-	printBIN(min, opSize);
 
-	printf("\n");
 
-	/* OCTAL */
-	printf("0%o\t", operand);
-	printf("0%o\t", max);
-	printf("0%o\t", min);
+	printAbsBin();
+	printAbsOct();
+	printAbsDec();
+	printAbsHex();
 
-	printf("\n");
-
-	/* DECIMAL */
-	printf("%d\t", operand);
-	printf("%d\t", max);
-	printf("%d\t", min);
-
-	printf("\n");
-
-	/* HEX */
-	printf("0x%x\t", operand);
-	printf("0x%x\t", max);
-	printf("0x%x\t", min);
-
-	printf("\n");
 
 	//converting to signed number
 	operand = toSigned(operand, opSize);
 
+	//signed max and mins
 	max = 0;
 	for (int i = opSize - 2; i >= 0; i--)
 	{
@@ -116,32 +94,87 @@ int main()
 		min += (1 << i);
 	}
 
-	int compMins = 1 << (opSize - 1);
+	//min values for ones and twos complement
+	 compMins = 1 << (opSize - 1);
 
-	printBIN(onesComp(operand, negative, opSize), opSize);
-	printBIN(max, opSize);
-	printBIN(compMins, opSize);
-
-	printf("\n");
-
-	/* TWOS COMPLEMENT */
-	printBIN(twosComp(operand, negative, opSize), opSize);
-	printBIN(max, opSize);
-	printBIN(compMins, opSize);
-
-	printf("\n");
-
-	/* SIGNED OPERAND */
-	printBIN(operand, opSize);
-	printBIN(max, opSize);
-	printBIN(min, opSize);
-
-	printf("\n");
+	printSignOnesComp();
+	printSignTwosComp();
+	printSignedBin();
 
 	return 0;
 }
 
-void printBIN(int input, int opSize)
+void printAbsBin(void)
+{
+	/* BIN */
+	convToBin(operand, opSize);
+	convToBin(max, opSize);
+	convToBin(min, opSize);
+
+	printf("\n");
+}
+
+void printAbsOct(void)
+{
+	/* OCTAL */
+	printf("0%o\t", operand);
+	printf("0%o\t", max);
+	printf("0%o\t", min);
+
+	printf("\n");
+}
+
+void printAbsDec(void)
+{
+	/* DECIMAL */
+	printf("%d\t", operand);
+	printf("%d\t", max);
+	printf("%d\t", min);
+
+	printf("\n");
+}
+
+void printAbsHex(void)
+{
+	/* HEX */
+	printf("0x%x\t", operand);
+	printf("0x%x\t", max);
+	printf("0x%x\t", min);
+
+	printf("\n");
+}
+
+void printSignOnesComp(void)
+{
+	/* ONES COMPLEMENT */
+	convToBin(onesComp(operand, opSize), opSize);
+	convToBin(max, opSize);
+	convToBin(compMins, opSize);
+
+	printf("\n");
+}
+
+void printSignTwosComp(void)
+{
+	/* TWOS COMPLEMENT */
+	convToBin(twosComp(operand, opSize), opSize);
+	convToBin(max, opSize);
+	convToBin(compMins, opSize);
+
+	printf("\n");
+}
+
+void printSignedBin(void)
+{
+	/* SIGNED OPERAND */
+	convToBin(operand, opSize);
+	convToBin(max, opSize);
+	convToBin(min, opSize);
+
+	printf("\n");
+}
+
+void convToBin(int input, int opSize)
 {
 	printf("0b");
 	for (int i = opSize - 1; i >= 0; i--)
@@ -151,7 +184,7 @@ void printBIN(int input, int opSize)
 	printf("\t");
 }
 
-int onesComp(int signedNoInput, bool neg, int opSize)
+int onesComp(int signedNoInput, int opSize)
 {
 	//If negative
 	if (signedNoInput & (1 << (opSize - 1)))
@@ -164,9 +197,9 @@ int onesComp(int signedNoInput, bool neg, int opSize)
 	}
 }
 
-int twosComp(int signedNoInput, bool neg, int opSize)
+int twosComp(int signedNoInput, int opSize)
 {
-	return (onesComp(signedNoInput, neg, opSize) + 1);
+	return (onesComp(signedNoInput, opSize) + 1);
 }
 
 int toSigned(int unsignedNoInput, int opSize)
@@ -176,8 +209,5 @@ int toSigned(int unsignedNoInput, int opSize)
 	} else {
 		unsignedNoInput &= ~(1 << (opSize - 1));
 	}
-
-	printf("\n%x\n", unsignedNoInput);
-
 	return unsignedNoInput;
 }
