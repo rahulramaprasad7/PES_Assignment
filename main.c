@@ -14,6 +14,7 @@ int operand = 0, min = 0, max = 0;
 void printBIN(int input, int opSize);
 int onesComp(int signedNo, bool neg, int opSize);
 int twosComp(int signedNo, bool neg, int opSize);
+int toSigned(int unsignedNo, int opSize);
 
 // Here is a quick summary of how to find the 1's complement representation of any decimal number x.
 // If x is positive, simply convert x to binary.
@@ -40,10 +41,10 @@ int main()
 		{
 			sscanf(ptr + i, "{%d,%d,%d}", &datastructure[inputQuantity].value, &datastructure[inputQuantity].radix, &datastructure[inputQuantity].opSize);
 
-			if((datastructure[inputQuantity].value == 0 && datastructure[inputQuantity].radix == 0 && datastructure[inputQuantity].opSize == 0))
+			if ((datastructure[inputQuantity].value == 0 && datastructure[inputQuantity].radix == 0 && datastructure[inputQuantity].opSize == 0))
 				sscanf(ptr + i, "{%x,%d,%d}", &datastructure[inputQuantity].value, &datastructure[inputQuantity].radix, &datastructure[inputQuantity].opSize);
 
-			if(datastructure[inputQuantity].radix == 8)
+			if (datastructure[inputQuantity].radix == 8)
 				sscanf(ptr + i, "{%o,%d,%d}", &datastructure[inputQuantity].value, &datastructure[inputQuantity].radix, &datastructure[inputQuantity].opSize);
 
 			inputQuantity++;
@@ -60,7 +61,7 @@ int main()
 	int radix = datastructure[0].radix;
 	int opSize = datastructure[0].opSize;
 
-	if(value < 0){
+	if (value < 0) {
 		negative = true;
 		operand = -1 * value;
 	} else {
@@ -74,42 +75,66 @@ int main()
 	{
 		max += (1 << i);
 	}
+	min = 0;
 	printBIN(max, opSize);
-	printBIN(0, opSize);
+	printBIN(min, opSize);
 
 	printf("\n");
 
 	/* OCTAL */
 	printf("0%o\t", operand);
 	printf("0%o\t", max);
-	printf("0%o\t", 0);
+	printf("0%o\t", min);
 
 	printf("\n");
 
-    /* DECIMAL */
+	/* DECIMAL */
 	printf("%d\t", operand);
 	printf("%d\t", max);
-	printf("%d\t", 0);
+	printf("%d\t", min);
 
 	printf("\n");
 
 	/* HEX */
 	printf("0x%x\t", operand);
 	printf("0x%x\t", max);
-	printf("0x%x\t", 0);
+	printf("0x%x\t", min);
 
 	printf("\n");
 
-    //converting to signed number
-	if(negative){
-		operand |= 1 << (opSize - 1);
+	//converting to signed number
+	operand = toSigned(operand, opSize);
+
+	max = 0;
+	for (int i = opSize - 2; i >= 0; i--)
+	{
+		max += (1 << i);
+	}
+	min = 0;
+	for (int i = opSize - 1; i >= 0; i--)
+	{
+		min += (1 << i);
 	}
 
-	// printBIN(operand, opSize);
-	printBIN(onesComp(operand,negative,opSize),opSize);
-	printBIN(twosComp(operand,negative,opSize),opSize);
+	int compMins = 1 << (opSize - 1);
 
+	printBIN(onesComp(operand, negative, opSize), opSize);
+	printBIN(max, opSize);
+	printBIN(compMins, opSize);
 
+	printf("\n");
+
+	/* TWOS COMPLEMENT */
+	printBIN(twosComp(operand, negative, opSize), opSize);
+	printBIN(max, opSize);
+	printBIN(compMins, opSize);
+
+	printf("\n");
+
+	/* SIGNED OPERAND */
+	printBIN(operand, opSize);
+	printBIN(max, opSize);
+	printBIN(min, opSize);
 
 	printf("\n");
 
@@ -123,22 +148,36 @@ void printBIN(int input, int opSize)
 	{
 		printf("%d", (input >> i) & 0x01);
 	}
-	printf("\t");	
+	printf("\t");
 }
 
-int onesComp(int signedNo, bool neg, int opSize)
+int onesComp(int signedNoInput, bool neg, int opSize)
 {
-	if(neg)
+	//If negative
+	if (signedNoInput & (1 << (opSize - 1)))
 	{
-		signedNo &= ~(1 << (opSize - 1));
-		signedNo = ~signedNo;
-		return signedNo;
+		signedNoInput &= ~(1 << (opSize - 1));
+		signedNoInput = ~signedNoInput;
+		return signedNoInput;
 	} else {
-		return ~signedNo;
-	}	
+		return ((signedNoInput & (1 << (opSize - 1))) + ~(signedNoInput));
+	}
 }
 
-int twosComp(int signedNo, bool neg, int opSize)
+int twosComp(int signedNoInput, bool neg, int opSize)
 {
-	return (onesComp(signedNo, neg, opSize) + 1);
+	return (onesComp(signedNoInput, neg, opSize) + 1);
+}
+
+int toSigned(int unsignedNoInput, int opSize)
+{
+	if (negative) {
+		unsignedNoInput += (1 << (opSize - 1));
+	} else {
+		unsignedNoInput &= ~(1 << (opSize - 1));
+	}
+
+	printf("\n%x\n", unsignedNoInput);
+
+	return unsignedNoInput;
 }
