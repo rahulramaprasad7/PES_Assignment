@@ -10,7 +10,7 @@ struct a {
 
 bool negative = false;
 int operand = 0, min = 0, max = 0;
-int value,radix,opSize,compMins;
+int value, radix, opSize, compMins;
 
 void convToBin(int input, int opSize);
 int onesComp(int signedNo, int opSize);
@@ -28,7 +28,7 @@ void printSignTwosComp(void);
 int main()
 {
 	char *ptr;
-	char input[] = "{-6, 10, 4}, {-6, 9, 4}, {-6, 10, 5}, {0xff, 10, 4}, {237, 10, 8}, {0354, 8, 8}, {78, 16, 8}, {-125, 10, 8},  {65400, 10, 8}, {65400, 10, 16}, {-32701, 10, 16} ";
+	char input[] = "{-6, 10, 4}, {-6, 9, 4}, {-6, 10, 5}, {0xEB, 10, 4}, {237, 10, 8}, {0354, 8, 8}, {78, 16, 8}, {-125, 10, 8},  {65400, 10, 8}, {65400, 10, 16}, {-32701, 10, 16} ";
 	ptr = input;
 
 	int inputQuantity = 0;
@@ -54,9 +54,9 @@ int main()
 
 	printf("\n");
 
-	 value = datastructure[0].value;
-	 radix = datastructure[0].radix;
-	 opSize = datastructure[0].opSize;
+	value = datastructure[0].value;
+	radix = datastructure[0].radix;
+	opSize = datastructure[0].opSize;
 
 	if (value < 0) {
 		negative = true;
@@ -95,7 +95,7 @@ int main()
 	}
 
 	//min values for ones and twos complement
-	 compMins = 1 << (opSize - 1);
+	compMins = 1 << (opSize - 1);
 
 	printSignOnesComp();
 	printSignTwosComp();
