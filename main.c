@@ -48,9 +48,9 @@ int main()
 		}
 	}
 
-	printf("%d\n", inputQuantity);
-	for ( int i = 0; i < 11; i++ )
-		printf("%d %d %d ", datastructure[i].value, datastructure[i].radix, datastructure[i].opSize);
+	// printf("%d\n", inputQuantity);
+	// for ( int i = 0; i < 11; i++ )
+	// 	printf("%d %d %d ", datastructure[i].value, datastructure[i].radix, datastructure[i].opSize);
 
 	printf("\n");
 
@@ -71,6 +71,9 @@ int main()
 		max += (1 << i);
 	}
 	min = 0;
+
+	printf("Input:  Value %d \t Radix %d \t Operand Size %d\n", value, radix, opSize);
+	printf("Output: \t\tValue \t\tMaximum \tMinimum\n");
 
 
 	printAbsBin();
@@ -107,6 +110,7 @@ int main()
 void printAbsBin(void)
 {
 	/* BIN */
+	printf("Binary (abs) \t\t");
 	convToBin(operand, opSize);
 	convToBin(max, opSize);
 	convToBin(min, opSize);
@@ -117,8 +121,9 @@ void printAbsBin(void)
 void printAbsOct(void)
 {
 	/* OCTAL */
-	printf("0%o\t", operand);
-	printf("0%o\t", max);
+	printf("Octal (abs) \t\t");
+	printf("0%o\t\t", operand);
+	printf("0%o\t\t", max);
 	printf("0%o\t", min);
 
 	printf("\n");
@@ -127,8 +132,9 @@ void printAbsOct(void)
 void printAbsDec(void)
 {
 	/* DECIMAL */
-	printf("%d\t", operand);
-	printf("%d\t", max);
+	printf("Decimal (abs) \t\t");
+	printf("%d\t\t", operand);
+	printf("%d\t\t", max);
 	printf("%d\t", min);
 
 	printf("\n");
@@ -137,8 +143,9 @@ void printAbsDec(void)
 void printAbsHex(void)
 {
 	/* HEX */
-	printf("0x%x\t", operand);
-	printf("0x%x\t", max);
+	printf("Hexadecimal (abs) \t");
+	printf("0x%x\t\t", operand);
+	printf("0x%x\t\t", max);
 	printf("0x%x\t", min);
 
 	printf("\n");
@@ -147,6 +154,7 @@ void printAbsHex(void)
 void printSignOnesComp(void)
 {
 	/* ONES COMPLEMENT */
+	printf("Signed One's Compliment\t");
 	convToBin(onesComp(operand, opSize), opSize);
 	convToBin(max, opSize);
 	convToBin(compMins, opSize);
@@ -157,6 +165,7 @@ void printSignOnesComp(void)
 void printSignTwosComp(void)
 {
 	/* TWOS COMPLEMENT */
+	printf("Signed Two's Compliment\t");
 	convToBin(twosComp(operand, opSize), opSize);
 	convToBin(max, opSize);
 	convToBin(compMins, opSize);
@@ -167,6 +176,7 @@ void printSignTwosComp(void)
 void printSignedBin(void)
 {
 	/* SIGNED OPERAND */
+	printf("Signed Magnitude \t");
 	convToBin(operand, opSize);
 	convToBin(max, opSize);
 	convToBin(min, opSize);
@@ -181,7 +191,7 @@ void convToBin(int input, int opSize)
 	{
 		printf("%d", (input >> i) & 0x01);
 	}
-	printf("\t");
+	printf("\t\t");
 }
 
 int onesComp(int signedNoInput, int opSize)
