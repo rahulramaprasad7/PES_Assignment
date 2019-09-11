@@ -14,7 +14,7 @@ int main()
 			sscanf(ptr + i, "{%d,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
 
 			if ((numProperties[inputQuantity].value == 0 && numProperties[inputQuantity].radix == 0 && numProperties[inputQuantity].opSize == 0))
-				sscanf(ptr + i, "{%x,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
+				sscanf(ptr + i, "{%X,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
 
 			if (numProperties[inputQuantity].radix == 8)
 				sscanf(ptr + i, "{%o,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
@@ -153,17 +153,17 @@ void printAbsHex(void)
 {
 	/* HEX */
 	printf("Hexadecimal (abs) \t");
-	printf("0x%x\t\t", operand);
+	printf("0x%X\t\t", operand);
 	if(opSize == 8)
 		printf("\t");
 	else if (opSize == 16)
 		printf("\t\t");
-	printf("0x%x\t\t", max);
+	printf("0x%X\t\t", max);
 	if(opSize == 8)
 		printf("\t");
 	else if (opSize == 16)
 		printf("\t\t");
-	printf("0x%x\t", min);
+	printf("0x%X\t", min);
 
 	printf("\n");
 }
