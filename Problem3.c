@@ -1,43 +1,101 @@
 #include <stdio.h>
+#include <stdint.h>
 
-int main()
+
+void printBin(int32_t input)
 {
-    int Input = 0xCAFE;
-    printf("%x\n",Input);
-    int temp=0;
+    printf("The binary value is\n");
+    printf("0b");
+    for (int32_t i = 15; i >= 0; i--)
+    {
+        printf("%d", (input >> i) & 0x01);
+    }
+    printf("\n");
+}
 
-    if(Input & 7 == 7)
-        printf("True\t%d\n",(Input & 7));
-    else
-        printf("False\t%d\n",(Input & 7));
 
-    temp = Input & 0xFF;
-    Input = Input >> 8;
-    Input = Input | (temp << 8);
-    printf("%x\n",Input);
+int32_t main()
+{
+    printf("\n");
 
-    if(Input & 7 == 7)
-        printf("True\t%d\n",(Input & 7));
-    else
-        printf("False\t%d\n",(Input & 7));
+    //Print original in hex
+    printf("The original number in HEX\n");
+    int32_t input = 0xCAFE;
+    printf("0x%X\n", input);
+    int32_t temp = 0;
+    printf("\n");
 
-    temp = Input & 0x0F;
-    Input = Input >> 4;
-    Input = Input | (temp << 12);
-    printf("%x\n",Input);
+    //Test if 3 of last 4 bits are on, and print the value in binary
+    printf("Are 3 of the last 4 bits on?\n");
+    if ((input & 0x07) == 0x07) {
+        printf("True\n");
+        printBin(input);
+    }
+    else {
+        printf("False\n");
+        printBin(input);
+    }
+    printf("\n");
 
-    if(Input & 7 == 7)
-        printf("True\t%d\n",(Input & 7));
-    else
-        printf("False\t%d\n",(Input & 7));
+    //Reverse the byte order, print the value in hexadecimal
+    printf("Reversing the byte order & printing the value in hexadecimal\n");
+    temp = input & 0xFF;
+    input = input >> 8;
+    input = input | (temp << 8);
+    printf("0x%X\n", input);
+    printf("\n");
 
-    temp = Input & 0xFF;
-    Input = Input >> 8;
-    Input = Input | (temp << 8);
-    printf("%x\n",Input);
-    
-    if(Input & 7 == 7)
-        printf("True\t%d\n",(Input & 7));
-    else
-        printf("False\t%d\n",(Input & 7));
+    //Test if 3 of last 4 bits are on, and print the value in binary
+    printf("Testing if 3 of last 4 bits are on, and printing the value in binary\n");
+    if ((input & 7) == 7) {
+        printf("True\n");
+        printBin(input);
+    }
+    else {
+        printf("False\n");
+        printBin(input);
+    }
+    printf("\n");
+
+    //Rotate the value by four bits to the left, print the value in hexadecimal
+    printf("Rotating the value by four bits to the left and printing the value in hexadecimal\n");
+    temp = input & 0x0F;
+    input = input >> 4;
+    input = input | (temp << 12);
+    printf("0x%X\n", input);
+    printf("\n");
+
+    //Test if 3 of last 4 bits are on, and print the value in binary
+    printf("Testing if 3 of last 4 bits are on, and printing the value in binary\n");
+    if ((input & 7) == 7) {
+        printf("True\n");
+        printBin(input);
+    }
+    else {
+        printf("False\n");
+        printBin(input);
+    }
+    printf("\n");
+
+    //Rotate the value by eight bits to the right, print the value in hexadecimal
+    printf("Rotating the value by eight bits to the right, printing the value in hexadecimal\n");
+    temp = input & 0xFF;
+    input = input >> 8;
+    input = input | (temp << 8);
+    printf("0x%X\n", input);
+    printf("\n");
+
+    //Test if 3 of last 4 bits are on, and print the value in binary
+    printf("Testing if 3 of last 4 bits are on, and printing the value in binary\n");
+    if ((input & 7) == 7) {
+        printf("True\n");
+        printBin(input);
+    }
+    else {
+        printf("False\n");
+        printBin(input);
+    }
+    printf("\n");
+
+    return 0;
 }
