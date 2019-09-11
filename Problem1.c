@@ -3,11 +3,11 @@
 #include <string.h>
 #include <stdlib.h>
 
-struct a {
+struct dataStructure {
 	int32_t value;
 	int32_t radix;
 	int32_t opSize;
-} datastructure[11];
+} numProperties[11];
 
 bool negative = false;
 int32_t operand = 0, min = 0, max = 0;
@@ -39,21 +39,17 @@ int main()
 	{
 		if (input[i] == '{')
 		{
-			sscanf(ptr + i, "{%d,%d,%d}", &datastructure[inputQuantity].value, &datastructure[inputQuantity].radix, &datastructure[inputQuantity].opSize);
+			sscanf(ptr + i, "{%d,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
 
-			if ((datastructure[inputQuantity].value == 0 && datastructure[inputQuantity].radix == 0 && datastructure[inputQuantity].opSize == 0))
-				sscanf(ptr + i, "{%x,%d,%d}", &datastructure[inputQuantity].value, &datastructure[inputQuantity].radix, &datastructure[inputQuantity].opSize);
+			if ((numProperties[inputQuantity].value == 0 && numProperties[inputQuantity].radix == 0 && numProperties[inputQuantity].opSize == 0))
+				sscanf(ptr + i, "{%x,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
 
-			if (datastructure[inputQuantity].radix == 8)
-				sscanf(ptr + i, "{%o,%d,%d}", &datastructure[inputQuantity].value, &datastructure[inputQuantity].radix, &datastructure[inputQuantity].opSize);
+			if (numProperties[inputQuantity].radix == 8)
+				sscanf(ptr + i, "{%o,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
 
 			inputQuantity++;
 		}
 	}
-
-	// printf("%d\n", inputQuantity);
-	// for ( int32_t i = 0; i < 11; i++ )
-	// 	printf("%d %d %d ", datastructure[i].value, datastructure[i].radix, datastructure[i].opSize);
 
 	printf("\n");
 
@@ -65,9 +61,9 @@ int main()
 		max = 0;
 		compMins = 0;
 
-		value = datastructure[i].value;
-		radix = datastructure[i].radix;
-		opSize = datastructure[i].opSize;
+		value = numProperties[i].value;
+		radix = numProperties[i].radix;
+		opSize = numProperties[i].opSize;
 		printAllOutputs();
 
 		printf("\n");
