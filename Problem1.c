@@ -1,6 +1,6 @@
 #include "Problem1.h"
 
-int main()
+int32_t main()
 {
 	char *ptr;
 	char input[] = "{-6, 10, 4}, {-6, 9, 4}, {-6, 10, 5}, {0xEB, 10, 4}, {237, 10, 8}, {0354, 8, 8}, {78, 16, 8}, {-125, 10, 8},  {65400, 10, 8}, {65400, 10, 16}, {-32701, 10, 16} ";
@@ -14,7 +14,7 @@ int main()
 			sscanf(ptr + i, "{%d,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
 
 			if ((numProperties[inputQuantity].value == 0 && numProperties[inputQuantity].radix == 0 && numProperties[inputQuantity].opSize == 0))
-				sscanf(ptr + i, "{%X,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
+				sscanf(ptr + i, "{%x,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
 
 			if (numProperties[inputQuantity].radix == 8)
 				sscanf(ptr + i, "{%o,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
@@ -153,17 +153,17 @@ void printAbsHex(void)
 {
 	/* HEX */
 	printf("Hexadecimal (abs) \t");
-	printf("0x%X\t\t", operand);
+	printf("0x%x\t\t", operand);
 	if(opSize == 8)
 		printf("\t");
 	else if (opSize == 16)
 		printf("\t\t");
-	printf("0x%X\t\t", max);
+	printf("0x%x\t\t", max);
 	if(opSize == 8)
 		printf("\t");
 	else if (opSize == 16)
 		printf("\t\t");
-	printf("0x%X\t", min);
+	printf("0x%x\t", min);
 
 	printf("\n");
 }
