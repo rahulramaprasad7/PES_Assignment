@@ -8,19 +8,19 @@ int32_t main()
 	for( uint32_t i = 0; i <(sizeof(input)/sizeof(char)); i++)
 	{
 		if( isupper( input[i] ) )                                           		//http://www.asciitable.com/ for checking ASCII range
-			printf("Code: %d	Type:Upper Case 	ASCII Char: %c\n",input[i],input[i]);
+			printf("Code: %d 	Type:Upper Case 	ASCII Char: %c\n",input[i],input[i]);
 		
 		else if( islower( input[i] ) )
-			printf("Code: %d	Type:Lower Case		ASCII Char: %c\n",input[i],input[i]);
+			printf("Code: %d 	Type:Lower Case		ASCII Char: %c\n",input[i],input[i]);
 			
 		else if( isdigit( input[i] ) )
-			printf("Code: %d	Type:Digit		ASCII Char: %c\n",input[i],input[i]);
+			printf("Code: %d 	Type:Digit		ASCII Char: %c\n",input[i],input[i]);
 		
 		else if( isspace( input[i] ) )
-			printf("Code: %d	Type:Space		ASCII Char: %c\n",input[i],input[i]);
+			printf("Code: %d 	Type:Space		ASCII Char: %c\n",input[i],input[i]);
 		
 		else 
-			printf("Code: %d	Type:Special		ASCII Char: %c\n",input[i],input[i]);
+			printf("Code: %d 	Type:Special		ASCII Char: %c\n",input[i],input[i]);
 	}
 	return 0;
 }
