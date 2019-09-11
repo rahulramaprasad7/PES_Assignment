@@ -1,21 +1,22 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
+#include <stdlib.h>
 
 struct a {
-	int value;
-	int radix;
-	int opSize;
+	int32_t value;
+	int32_t radix;
+	int32_t opSize;
 } datastructure[11];
 
 bool negative = false;
-int operand = 0, min = 0, max = 0;
-int value, radix, opSize, compMins;
+int32_t operand = 0, min = 0, max = 0;
+int32_t value, radix, opSize, compMins;
 
-void convToBin(int input, int opSize);
-int onesComp(int signedNo, int opSize);
-int twosComp(int signedNo, int opSize);
-int toSigned(int unsignedNo, int opSize);
+void convToBin(int32_t input, int32_t opSize);
+int32_t onesComp(int32_t signedNo, int32_t opSize);
+int32_t twosComp(int32_t signedNo, int32_t opSize);
+int32_t toSigned(int32_t unsignedNo, int32_t opSize);
 void printAbsBin(void);
 void printAbsOct(void);
 void printAbsDec(void);
@@ -33,8 +34,8 @@ int main()
 	char input[] = "{-6, 10, 4}, {-6, 9, 4}, {-6, 10, 5}, {0xEB, 10, 4}, {237, 10, 8}, {0354, 8, 8}, {78, 16, 8}, {-125, 10, 8},  {65400, 10, 8}, {65400, 10, 16}, {-32701, 10, 16} ";
 	ptr = input;
 
-	int inputQuantity = 0;
-	for ( int i = 0; i < strlen(input); ++i)
+	int32_t inputQuantity = 0;
+	for ( int32_t i = 0; i < strlen(input); ++i)
 	{
 		if (input[i] == '{')
 		{
@@ -51,12 +52,12 @@ int main()
 	}
 
 	// printf("%d\n", inputQuantity);
-	// for ( int i = 0; i < 11; i++ )
+	// for ( int32_t i = 0; i < 11; i++ )
 	// 	printf("%d %d %d ", datastructure[i].value, datastructure[i].radix, datastructure[i].opSize);
 
 	printf("\n");
 
-	for (int i = 0; i < inputQuantity; ++i)
+	for (int32_t i = 0; i < inputQuantity; ++i)
 	{
 		negative = false;
 		operand = 0;
@@ -87,16 +88,20 @@ void printAllOutputs(void)
 	}
 
 	//max & min unsigned
-	for (int i = opSize - 1; i >= 0; i--)
+	for (int32_t i = opSize - 1; i >= 0; i--)
 	{
 		max += (1 << i);
 	}
 	min = 0;
 
-	//Print Ouptut header
+	//print Ouptut header
 	printf("Input:  Value %d \t Radix %d \t Operand Size %d\n", value, radix, opSize);
-	printf("Output: \t\tValue \t\tMaximum \tMinimum\n");
-
+	if(opSize == 4)
+		printf("Output: \t\tValue \t\tMaximum \tMinimum\n");
+	else if(opSize == 8)
+		printf("Output: \t\tValue \t\t\tMaximum \t\tMinimum\n");
+	else if(opSize == 16)
+		printf("Output: \t\tValue \t\t\t\tMaximum \t\t\tMinimum\n");
 
 	printAbsBin();
 	printAbsOct();
@@ -109,12 +114,12 @@ void printAllOutputs(void)
 
 	//signed max and mins
 	max = 0;
-	for (int i = opSize - 2; i >= 0; i--)
+	for (int32_t i = opSize - 2; i >= 0; i--)
 	{
 		max += (1 << i);
 	}
 	min = 0;
-	for (int i = opSize - 1; i >= 0; i--)
+	for (int32_t i = opSize - 1; i >= 0; i--)
 	{
 		min += (1 << i);
 	}
@@ -143,7 +148,15 @@ void printAbsOct(void)
 	/* OCTAL */
 	printf("Octal (abs) \t\t");
 	printf("0%o\t\t", operand);
+	if(opSize == 8)
+		printf("\t");
+	else if (opSize == 16)
+		printf("\t\t");
 	printf("0%o\t\t", max);
+	if(opSize == 8)
+		printf("\t");
+	else if (opSize == 16)
+		printf("\t\t");
 	printf("0%o\t", min);
 
 	printf("\n");
@@ -154,7 +167,15 @@ void printAbsDec(void)
 	/* DECIMAL */
 	printf("Decimal (abs) \t\t");
 	printf("%d\t\t", operand);
+	if(opSize == 8)
+		printf("\t");
+	else if (opSize == 16)
+		printf("\t\t");
 	printf("%d\t\t", max);
+	if(opSize == 8)
+		printf("\t");
+	else if (opSize == 16)
+		printf("\t\t");
 	printf("%d\t", min);
 
 	printf("\n");
@@ -165,7 +186,15 @@ void printAbsHex(void)
 	/* HEX */
 	printf("Hexadecimal (abs) \t");
 	printf("0x%x\t\t", operand);
+	if(opSize == 8)
+		printf("\t");
+	else if (opSize == 16)
+		printf("\t\t");
 	printf("0x%x\t\t", max);
+	if(opSize == 8)
+		printf("\t");
+	else if (opSize == 16)
+		printf("\t\t");
 	printf("0x%x\t", min);
 
 	printf("\n");
@@ -204,17 +233,17 @@ void printSignedBin(void)
 	printf("\n");
 }
 
-void convToBin(int input, int opSize)
+void convToBin(int32_t input, int32_t opSize)
 {
 	printf("0b");
-	for (int i = opSize - 1; i >= 0; i--)
+	for (int32_t i = opSize - 1; i >= 0; i--)
 	{
 		printf("%d", (input >> i) & 0x01);
 	}
 	printf("\t\t");
 }
 
-int onesComp(int signedNoInput, int opSize)
+int32_t onesComp(int32_t signedNoInput, int32_t opSize)
 {
 	//If negative
 	if (signedNoInput & (1 << (opSize - 1)))
@@ -227,12 +256,12 @@ int onesComp(int signedNoInput, int opSize)
 	}
 }
 
-int twosComp(int signedNoInput, int opSize)
+int32_t twosComp(int32_t signedNoInput, int32_t opSize)
 {
 	return (onesComp(signedNoInput, opSize) + 1);
 }
 
-int toSigned(int unsignedNoInput, int opSize)
+int32_t toSigned(int32_t unsignedNoInput, int32_t opSize)
 {
 	if (negative) {
 		unsignedNoInput += (1 << (opSize - 1));
