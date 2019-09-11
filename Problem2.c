@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <ctype.h>
-uint32_t main()
+int32_t main()
 {
 	char input[]={66,114,117,99,101,32,83,97,121,115,32,72,105,33,7,9,50,48,49,57};
 	
