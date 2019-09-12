@@ -5,7 +5,7 @@ int32_t main()
 	char *ptr = NULL;
 	char input[] = "{-6, 10, 4}, {-6, 9, 4}, {-6, 10, 5}, {0xEB, 10, 4}, {237, 10, 8}, {0354, 8, 8}, {78, 16, 8}, {-125, 10, 8},  {65400, 10, 8}, {65400, 10, 16}, {-32701, 10, 16} ";
 	ptr = input;
-
+    bool error=false;
 	int32_t inputQuantity = 0;
 	for ( int32_t i = 0; i < strlen(input); ++i)
 	{
@@ -32,13 +32,12 @@ int32_t main()
 		min = 0;
 		max = 0;
 		compMins = 0;
-		bool error = false;
-
+		error=false;
 		value = numProperties[i].value;
 		radix = numProperties[i].radix;
 		opSize = numProperties[i].opSize;
 
-		if ((radix != 8) && (radix != 10) && (radix != 16))
+		if ((radix != 8) && (radix != 10) && (radix != 16))  //To check the radix
 		{
 			printf("Error: The Radix value is not acceptable for the input {%d %d %d}\n", value, radix, opSize);
 			printf("The radix should be 8, 10 or 16, and the input radix is %d\n", radix);
@@ -46,32 +45,13 @@ int32_t main()
 			printf("\n");
 		}
 
-		if ((opSize == 4) && (opSize == 8) && (opSize == 16))
+		if ((opSize != 4) && (opSize != 8) && (opSize != 16))  //To check the opsize
 		{
 			printf("Error: The Operand Size is not acceptable for the input {%d %d %d}\n", value, radix, opSize);
 			printf("The operand size should be 4, 8 or 16, and the input operand size is %d\n", opSize);
 			error = true;
 			printf("\n");
 		}
-
-		int32_t maxOpValue = (pow(2, opSize) / 2) - 1;
-		int32_t minOpValue = (pow(2, opSize) / 2) * -1;
-
-		if (value > maxOpValue)
-		{
-			printf("Error: The input value is greater than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
-			printf("The given value is %d and the maximum value for the given operand is %d\n", value, maxOpValue);
-			error = true;
-			printf("\n");
-		}
-		else if (value < minOpValue)
-		{
-			printf("Error: The input value is less than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
-			printf("The given value is %d and the minimum value for the given operand is %d\n", value, minOpValue);
-			error = true;
-			printf("\n");
-		}
-
 
 		if (!error)
 			printAllOutputs();
@@ -86,6 +66,8 @@ int32_t main()
 
 void printAllOutputs(void)
 {
+    bool error=false;
+    
 	if (value < 0) {
 		negative = true;
 		operand = -1 * value;
@@ -109,10 +91,14 @@ void printAllOutputs(void)
 	else if (opSize == 16)
 		printf("Output: \t\tValue \t\t\t\tMaximum \t\t\tMinimum\n");
 
-	printAbsBin();
-	printAbsOct();
-	printAbsDec();
-	printAbsHex();
+	if( value <= pow(2,opSize) )                            // To check if value is out of range for absolute outputs
+	{
+		printAbsBin();
+		printAbsOct();
+		printAbsDec();
+		printAbsHex();
+
+	}
 
 
 	//converting to signed number
@@ -133,9 +119,33 @@ void printAllOutputs(void)
 	//min values for ones and twos complement
 	compMins = 1 << (opSize - 1);
 
-	printSignOnesComp();
-	printSignTwosComp();
-	printSignedBin();
+	int32_t maxOpValue = (pow(2, opSize) / 2) - 1;
+	int32_t minOpValue = (pow(2, opSize) / 2) * -1;
+
+	if (value > maxOpValue) 						//To check opsize for signed outputs
+	{
+		printf("Error: The input value is greater than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
+		printf("The given value is %d and the maximum value for the given operand is %d\n", value, maxOpValue);
+		error = true;
+		printf("\n");
+	}
+
+	else if (value < minOpValue)
+	{
+		printf("Error: The input value is less than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
+		printf("The given value is %d and the minimum value for the given operand is %d\n", value, minOpValue);
+		error = true;
+		printf("\n");
+	}
+
+	else
+	{
+
+		printSignOnesComp();
+		printSignTwosComp();
+		printSignedBin();
+
+	}
 }
 
 void printAbsBin(void)
