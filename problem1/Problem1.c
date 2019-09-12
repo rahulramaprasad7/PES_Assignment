@@ -12,7 +12,7 @@ int32_t main()
 		if (input[i] == '{')
 		{
 			sscanf(ptr + i, "{%d,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
-			
+
 			if ((numProperties[inputQuantity].value == 0 && numProperties[inputQuantity].radix == 0 && numProperties[inputQuantity].opSize == 0))
 				sscanf(ptr + i, "{%x,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
 
@@ -32,13 +32,48 @@ int32_t main()
 		min = 0;
 		max = 0;
 		compMins = 0;
+		bool error = false;
 
 		value = numProperties[i].value;
 		radix = numProperties[i].radix;
 		opSize = numProperties[i].opSize;
-		if( radix != 8 || radix != 10 || radix != 16)
-			printf(" The Radix value is not acceptable\n");
-		else
+
+		if (!((radix == 8) || (radix == 10) || (radix == 16)))
+		{
+			printf("Error: The Radix value is not acceptable for the input {%d %d %d}\n", value, radix, opSize);
+			printf("The radix should be 8, 10 or 16, and the input radix is %d\n", radix);
+			error = true;
+			printf("\n");
+		}
+
+		if (!((opSize == 4) || (opSize == 8) || (opSize == 16)))
+		{
+			printf("Error: The Operand Size is not acceptable for the input {%d %d %d}\n", value, radix, opSize);
+			printf("The operand size should be 4, 8 or 16, and the input operand size is %d\n", opSize);
+			error = true;
+			printf("\n");
+		}
+
+		int32_t maxOpValue = (pow(2, opSize) / 2) - 1;
+		int32_t minOpValue = (pow(2, opSize) / 2) * -1;
+
+		if (value > maxOpValue)
+		{
+			printf("Error: The input value is greater than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
+			printf("The given value is %d and the maximum value for the given operand is %d\n", value, maxOpValue);
+			error = true;
+			printf("\n");
+		}
+		else if (value < minOpValue)
+		{
+			printf("Error: The input value is less than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
+			printf("The given value is %d and the minimum value for the given operand is %d\n", value, minOpValue);
+			error = true;
+			printf("\n");
+		}
+
+
+		if (!error)
 			printAllOutputs();
 
 		printf("\n");
@@ -67,11 +102,11 @@ void printAllOutputs(void)
 
 	//print Ouptut header
 	printf("Input:  Value %d \t Radix %d \t Operand Size %d\n", value, radix, opSize);
-	if(opSize == 4)
+	if (opSize == 4)
 		printf("Output: \t\tValue \t\tMaximum \tMinimum\n");
-	else if(opSize == 8)
+	else if (opSize == 8)
 		printf("Output: \t\tValue \t\t\tMaximum \t\tMinimum\n");
-	else if(opSize == 16)
+	else if (opSize == 16)
 		printf("Output: \t\tValue \t\t\t\tMaximum \t\t\tMinimum\n");
 
 	printAbsBin();
@@ -119,12 +154,12 @@ void printAbsOct(void)
 	/* OCTAL */
 	printf("Octal (abs) \t\t");
 	printf("0%o\t\t", operand);
-	if(opSize == 8)
+	if (opSize == 8)
 		printf("\t");
 	else if (opSize == 16)
 		printf("\t\t");
 	printf("0%o\t\t", max);
-	if(opSize == 8)
+	if (opSize == 8)
 		printf("\t");
 	else if (opSize == 16)
 		printf("\t\t");
@@ -138,12 +173,12 @@ void printAbsDec(void)
 	/* DECIMAL */
 	printf("Decimal (abs) \t\t");
 	printf("%d\t\t", operand);
-	if(opSize == 8)
+	if (opSize == 8)
 		printf("\t");
 	else if (opSize == 16)
 		printf("\t\t");
 	printf("%d\t\t", max);
-	if(opSize == 8)
+	if (opSize == 8)
 		printf("\t");
 	else if (opSize == 16)
 		printf("\t\t");
@@ -157,12 +192,12 @@ void printAbsHex(void)
 	/* HEX */
 	printf("Hexadecimal (abs) \t");
 	printf("0x%x\t\t", operand);
-	if(opSize == 8)
+	if (opSize == 8)
 		printf("\t");
 	else if (opSize == 16)
 		printf("\t\t");
 	printf("0x%x\t\t", max);
-	if(opSize == 8)
+	if (opSize == 8)
 		printf("\t");
 	else if (opSize == 16)
 		printf("\t\t");
