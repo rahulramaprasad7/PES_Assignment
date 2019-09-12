@@ -5,7 +5,7 @@
 > - Prayag Milan Desai
 
 **Description of repository contents:**  
->This repository contains three folders, each having a C program and an output file of that program. The description of the folders is as follows:  
+>This repository contains three folders, each having a C program and an output file of that program. The description of the folders are as follows:  
 
 **Folder Problem1:**  
 This folder contains the C code and the output file for the first problem of the first PES project.  
