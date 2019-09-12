@@ -36,7 +36,10 @@ int32_t main()
 		value = numProperties[i].value;
 		radix = numProperties[i].radix;
 		opSize = numProperties[i].opSize;
-		printAllOutputs();
+		if( radix != 8 || radix != 10 || radix != 16)
+			printf(" The Radix value is not acceptable\n");
+		else
+			printAllOutputs();
 
 		printf("\n");
 	}
