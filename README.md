@@ -4,9 +4,10 @@
 > - Rahul Ramaprasad 
 > - Prayag Milan Desai
 
-**Description of repository contents:**
+**Description of repository contents:**  
+>This repository contains three folders, each having a C program and an output file of that program. The description of the >folders is as follows:  
 
-**Problem1:**  
+**Folder Problem1:**  
 This folder contains the C code and the output file for the first problem of the first PES project.  
 It is a C program takes as input a numeric value, a radix, and an operand size, and outputs a table containing the following values:
 - Binary (abs)
@@ -15,7 +16,7 @@ It is a C program takes as input a numeric value, a radix, and an operand size, 
 - Signed One’s Compliment
 - Signed Two’s Compliment Sign-Magnitude
 
-**Problem2:**  
+**Folder Problem2:**  
 This folder contains the C code and the output file for the second problem of the first PES project.  
 It is a C program that uses a logical expression that tests whether a given character code is
 - Lower case
@@ -26,7 +27,7 @@ It is a C program that uses a logical expression that tests whether a given char
 
 Infromation about segregating the input ASCII codes into different categories can be found in the Problem2 folder
 
-**Problem3:**  
+**Folder Problem3:**  
 This folder contains the C code and the output file for the third problem of the first PES project.
 In the C program, given the starting integer value 0xCAFE, the program performs a combination of the following functions to the starting integer, and outputs the result of each finction to the command line
 - Printing in binary, hexadecimal
