@@ -1,8 +1,8 @@
 # PES Project 1 Readme
 
-### Team Members:
-### - Rahul Ramaprasad
-### - Prayag Milan Desai
+**Team Members:**
+**- Rahul Ramaprasad**
+**- Prayag Milan Desai**
 
 **Description of repository contents:**
 
@@ -23,6 +23,7 @@ C program that uses a logical expression that tests whether a given character co
 - Digit
 - White space (like null, backspace, space, tabs, etc.)
 - Special character (like ! or >)
+
 More infromation about segregating the input ASCII codes into different categories can be found in the Problem2 folder
 
 **Problem3:**
