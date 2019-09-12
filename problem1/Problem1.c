@@ -38,7 +38,7 @@ int32_t main()
 		radix = numProperties[i].radix;
 		opSize = numProperties[i].opSize;
 
-		if (!((radix == 8) || (radix == 10) || (radix == 16)))
+		if ((radix != 8) && (radix != 10) && (radix != 16))
 		{
 			printf("Error: The Radix value is not acceptable for the input {%d %d %d}\n", value, radix, opSize);
 			printf("The radix should be 8, 10 or 16, and the input radix is %d\n", radix);
@@ -46,7 +46,7 @@ int32_t main()
 			printf("\n");
 		}
 
-		if (!((opSize == 4) || (opSize == 8) || (opSize == 16)))
+		if ((opSize == 4) && (opSize == 8) && (opSize == 16))
 		{
 			printf("Error: The Operand Size is not acceptable for the input {%d %d %d}\n", value, radix, opSize);
 			printf("The operand size should be 4, 8 or 16, and the input operand size is %d\n", opSize);
