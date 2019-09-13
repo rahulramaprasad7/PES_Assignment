@@ -5,7 +5,7 @@ int32_t main()
 	char *ptr = NULL;
 	char input[] = "{-6, 10, 4}, {-6, 9, 4}, {-6, 10, 5}, {0xEB, 10, 4}, {237, 10, 8}, {0354, 8, 8}, {78, 16, 8}, {-125, 10, 8},  {65400, 10, 8}, {65400, 10, 16}, {-32701, 10, 16} ";
 	ptr = input;
-    	bool error=false;
+    bool error=false;
 	int32_t inputQuantity = 0;
 	for ( int32_t i = 0; i < strlen(input); ++i)
 	{
@@ -67,7 +67,7 @@ int32_t main()
 void printAllOutputs(void)
 {
     bool error=false;
-    
+
 	if (value < 0) {
 		negative = true;
 		operand = -1 * value;
@@ -81,14 +81,67 @@ void printAllOutputs(void)
 		max += (1 << i);
 	}
 	min = 0;
-
+    	//print Ouptut header
+	printf("Input:  Value %d \t Radix %d \t Operand Size %d\n", value, radix, opSize);
 	if( value <= pow(2,opSize) )                            // To check if value is out of range for absolute outputs
 	{
+        if (opSize == 4)
+            printf("Output: \t\tValue \t\tMaximum \tMinimum\n");
+        else if (opSize == 8)
+            printf("Output: \t\tValue \t\t\tMaximum \t\tMinimum\n");
+        else if (opSize == 16)
+            printf("Output: \t\tValue \t\t\t\tMaximum \t\t\tMinimum\n");
+
 		printAbsBin();
 		printAbsOct();
 		printAbsDec();
 		printAbsHex();
 
+        //converting to signed number
+        operand = toSigned(operand, opSize);
+
+        //signed max and mins
+        max = 0;
+        for (int32_t i = opSize - 2; i >= 0; i--)
+        {
+            max += (1 << i);
+        }
+        min = 0;
+        for (int32_t i = opSize - 1; i >= 0; i--)
+        {
+            min += (1 << i);
+        }
+
+        //min values for ones and twos complement
+        compMins = 1 << (opSize - 1);
+
+        int32_t maxOpValue = (pow(2, opSize) / 2) - 1;
+        int32_t minOpValue = (pow(2, opSize) / 2) * -1;
+
+        if (value > maxOpValue) 						//To check opsize for signed outputs
+        {
+            printf("Error: The input value is greater than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
+            printf("The given value is %d and the maximum value for the given operand is %d\n", value, maxOpValue);
+            error = true;
+            printf("\n");
+        }
+
+        else if (value < minOpValue)
+        {
+            printf("Error: The input value is less than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
+            printf("The given value is %d and the minimum value for the given operand is %d\n", value, minOpValue);
+            error = true;
+            printf("\n");
+        }
+
+        else
+        {
+
+            printSignOnesComp();
+            printSignTwosComp();
+            printSignedBin();
+
+        }
 	}
 	else
 	{
@@ -96,60 +149,6 @@ void printAllOutputs(void)
 		printf("The given value is %d and the maximum value for the given operand is %d\n", value, pow(2,opSize));
 		error = true;
 		printf("\n");
-	}
-	//print Ouptut header
-	printf("Input:  Value %d \t Radix %d \t Operand Size %d\n", value, radix, opSize);
-	if (opSize == 4)
-		printf("Output: \t\tValue \t\tMaximum \tMinimum\n");
-	else if (opSize == 8)
-		printf("Output: \t\tValue \t\t\tMaximum \t\tMinimum\n");
-	else if (opSize == 16)
-		printf("Output: \t\tValue \t\t\t\tMaximum \t\t\tMinimum\n");
-
-	//converting to signed number
-	operand = toSigned(operand, opSize);
-
-	//signed max and mins
-	max = 0;
-	for (int32_t i = opSize - 2; i >= 0; i--)
-	{
-		max += (1 << i);
-	}
-	min = 0;
-	for (int32_t i = opSize - 1; i >= 0; i--)
-	{
-		min += (1 << i);
-	}
-
-	//min values for ones and twos complement
-	compMins = 1 << (opSize - 1);
-
-	int32_t maxOpValue = (pow(2, opSize) / 2) - 1;
-	int32_t minOpValue = (pow(2, opSize) / 2) * -1;
-
-	if (value > maxOpValue) 						//To check opsize for signed outputs
-	{
-		printf("Error: The input value is greater than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
-		printf("The given value is %d and the maximum value for the given operand is %d\n", value, maxOpValue);
-		error = true;
-		printf("\n");
-	}
-
-	else if (value < minOpValue)
-	{
-		printf("Error: The input value is less than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
-		printf("The given value is %d and the minimum value for the given operand is %d\n", value, minOpValue);
-		error = true;
-		printf("\n");
-	}
-
-	else
-	{
-
-		printSignOnesComp();
-		printSignTwosComp();
-		printSignedBin();
-
 	}
 }
 
