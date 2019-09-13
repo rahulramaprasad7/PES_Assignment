@@ -1,8 +1,9 @@
 # PES Project 1 Readme
 
 **Team Members:** 
-- Rahul Ramaprasad 
 - Prayag Milan Desai
+- Rahul Ramaprasad 
+
 
 ---
 
