@@ -82,15 +82,6 @@ void printAllOutputs(void)
 	}
 	min = 0;
 
-	//print Ouptut header
-	printf("Input:  Value %d \t Radix %d \t Operand Size %d\n", value, radix, opSize);
-	if (opSize == 4)
-		printf("Output: \t\tValue \t\tMaximum \tMinimum\n");
-	else if (opSize == 8)
-		printf("Output: \t\tValue \t\t\tMaximum \t\tMinimum\n");
-	else if (opSize == 16)
-		printf("Output: \t\tValue \t\t\t\tMaximum \t\t\tMinimum\n");
-
 	if( value <= pow(2,opSize) )                            // To check if value is out of range for absolute outputs
 	{
 		printAbsBin();
@@ -99,7 +90,21 @@ void printAllOutputs(void)
 		printAbsHex();
 
 	}
-
+	else
+	{
+		printf("Error: The input value is greater than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
+		printf("The given value is %d and the maximum value for the given operand is %d\n", value, pow(2,opSize));
+		error = true;
+		printf("\n");
+	}
+	//print Ouptut header
+	printf("Input:  Value %d \t Radix %d \t Operand Size %d\n", value, radix, opSize);
+	if (opSize == 4)
+		printf("Output: \t\tValue \t\tMaximum \tMinimum\n");
+	else if (opSize == 8)
+		printf("Output: \t\tValue \t\t\tMaximum \t\tMinimum\n");
+	else if (opSize == 16)
+		printf("Output: \t\tValue \t\t\t\tMaximum \t\t\tMinimum\n");
 
 	//converting to signed number
 	operand = toSigned(operand, opSize);
