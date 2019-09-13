@@ -4,9 +4,10 @@
 
 void printBin(int32_t input)
 {
+    int32_t i;
     printf("The binary value is\n");
     printf("0b");
-    for (int32_t i = 15; i >= 0; i--)
+    for (i = 15; i >= 0; i--)
     {
         printf("%d", (input >> i) & 0x01);
     }
