@@ -21,7 +21,7 @@ It is a C program takes as input a numeric value, a radix, and an operand size, 
 - Sign-Magnitude
 
 **Folder problem2:**  
-This folder contains the C code and the output file for the second problem of the first PES project.  
+This folder contains the C code, the output file for the second problem of the first PES project and a README file to describe the ASCII code segregation.  
 It is a C program that uses a logical expression that tests whether a given character code is
 - Lower case
 - Upper case
