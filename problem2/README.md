@@ -1,4 +1,4 @@
-**# ASCII Code Segregation**
+** # ASCII Code Segregation **
 ## Characters - Equivalent ASCII code
 * Upper Case alphabets- 65 to 90
 * Lower Case alhpabets- 97 to 122
