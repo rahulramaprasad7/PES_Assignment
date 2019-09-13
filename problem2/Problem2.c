@@ -10,19 +10,19 @@ int32_t main()
 	bool check = true;
 	for( i = 0; i < (sizeof(input)/sizeof(char)); i++)
 	{
-		if( isupper( input[i] ) )                                           		       //To check if the input Character is Upper Case Alphabet
+		if( isupper( input[i] ) )  //To check if the input Character is Upper Case Alphabet
 			printf("Code: %d 	Type:Upper Case 	ASCII Char: %c\n",input[i],input[i]);
 		
-		else if( islower( input[i] ) )													  //To check if the input Character is Lower Case Alphabet
+		else if( islower( input[i] ) )  //To check if the input Character is Lower Case Alphabet
 			printf("Code: %d 	Type:Lower Case		ASCII Char: %c\n",input[i],input[i]);
 			
-		else if( isdigit( input[i] ) )                                                    //To check if the input Character is Digit
+		else if( isdigit( input[i] ) )  //To check if the input Character is Digit
 			printf("Code: %d 	Type:Digit		ASCII Char: %c\n",input[i],input[i]);
 		
-		else if( isspace(input[i]) || (input[i] == 8) )									  //To check if the input Character is a Space and 8 is ASCII code for backspace
+		else if( isspace(input[i]) || (input[i] == 8) )  //To check if the input Character is a Space and 8 is ASCII code for backspace
 			printf("Code: %d 	Type:Space		ASCII Char: %c\n",input[i],input[i]);
 		
-		else if( check )																  //To check if the input character is special 
+		else if( check )  //To check if the input character is special 
 		{	
 			for ( j = 0; j < (sizeof(lookUpTableSpecial)/sizeof(char)); j++) 
 			{	
@@ -32,11 +32,11 @@ int32_t main()
 					check = true;
 					break;
 				}
-				check = false;                                                            //If the input character is not special, keep the check false to execute else 
+				check = false;  //If the input character is not special, keep the check false to execute else 
 			}
 		}
 		
-		else 																			  //To check if the input character does not fall under any of the categories above
+		else 	  //To check if the input character does not fall under any of the categories above
 			printf("The ASCII code %d does not fall under any category\n",input[i]);
 		
 	}
