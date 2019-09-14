@@ -47,7 +47,8 @@ int32_t main()
     printf("\n");
 
     //Test if 3 of last 4 bits are on, and print the value in binary
-    printf("Testing if 3 of last 4 bits are on, and printing the value in binary\n");
+    printf("Testing if 3 of last 4 bits are on, and printing the "
+           "value in binary\n");
     if ((input & 7) == 7) {
         printf("True\n");
         printBin(input);
@@ -59,7 +60,8 @@ int32_t main()
     printf("\n");
 
     //Rotate the value by four bits to the left, print the value in hexadecimal
-    printf("Rotating the value by four bits to the left and printing the value in hexadecimal\n");
+    printf("Rotating the value by four bits to the left and printing the"
+           " value in hexadecimal\n");
     temp = input & 0x0F;
     input = input >> 4;
     input = input | (temp << 12);
@@ -67,7 +69,8 @@ int32_t main()
     printf("\n");
 
     //Test if 3 of last 4 bits are on, and print the value in binary
-    printf("Testing if 3 of last 4 bits are on, and printing the value in binary\n");
+    printf("Testing if 3 of last 4 bits are on, and printing the "
+           "value in binary\n");
     if ((input & 7) == 7) {
         printf("True\n");
         printBin(input);
@@ -79,7 +82,8 @@ int32_t main()
     printf("\n");
 
     //Rotate the value by eight bits to the right, print the value in hexadecimal
-    printf("Rotating the value by eight bits to the right, printing the value in hexadecimal\n");
+    printf("Rotating the value by eight bits to the right, printing the "
+           "value in hexadecimal\n");
     temp = input & 0xFF;
     input = input >> 8;
     input = input | (temp << 8);
@@ -87,7 +91,8 @@ int32_t main()
     printf("\n");
 
     //Test if 3 of last 4 bits are on, and print the value in binary
-    printf("Testing if 3 of last 4 bits are on, and printing the value in binary\n");
+    printf("Testing if 3 of last 4 bits are on, and printing the "
+           "value in binary\n");
     if ((input & 7) == 7) {
         printf("True\n");
         printBin(input);
