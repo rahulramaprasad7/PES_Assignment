@@ -17,7 +17,7 @@ int32_t main()
 			sscanf(stringLocationPtr + i, "{%d,%d,%d}",\
 				   &numProperties[inputQuantity].value, \
 				   &numProperties[inputQuantity].radix, \
-	               &numProperties[inputQuantity].opSize); \
+				   &numProperties[inputQuantity].opSize); \
 
 			if ((numProperties[inputQuantity].value == 0 && \
 			        numProperties[inputQuantity].radix == 0 && \
