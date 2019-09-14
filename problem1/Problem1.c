@@ -4,7 +4,9 @@
 int32_t main()
 {
 	char *ptr = NULL;
-	char input[] = "{-6, 10, 4}, {-6, 9, 4}, {-6, 10, 5}, {0xEB, 10, 4}, {237, 10, 8}, {0354, 8, 8}, {78, 16, 8}, {-125, 10, 8},  {65400, 10, 8}, {65400, 10, 16}, {-32701, 10, 16} ";
+	char input[] = "{-6, 10, 4}, {-6, 9, 4}, {-6, 10, 5}, {0xEB, 10, 4},\
+					{237, 10, 8}, {0354, 8, 8}, {78, 16, 8}, {-125, 10, 8},\
+				    {65400, 10, 8}, {65400, 10, 16}, {-32701, 10, 16} ";
 	ptr = input;
 	bool error = false;
 	int32_t inputQuantity = 0;
@@ -12,13 +14,23 @@ int32_t main()
 	{
 		if (input[i] == '{')
 		{
-			sscanf(ptr + i, "{%d,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
+			sscanf(ptr + i, "{%d,%d,%d}", &numProperties[inputQuantity].value, \
+			       &numProperties[inputQuantity].radix, \
+			       &numProperties[inputQuantity].opSize); \
 
-			if ((numProperties[inputQuantity].value == 0 && numProperties[inputQuantity].radix == 0 && numProperties[inputQuantity].opSize == 0))
-				sscanf(ptr + i, "{%x,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
+			if ((numProperties[inputQuantity].value == 0 && \
+			        numProperties[inputQuantity].radix == 0 && \
+			        numProperties[inputQuantity].opSize == 0))\
+				sscanf(ptr + i, "{%x,%d,%d}", \
+				       &numProperties[inputQuantity].value, \
+				       &numProperties[inputQuantity].radix, \
+				       &numProperties[inputQuantity].opSize);
 
 			if (numProperties[inputQuantity].radix == 8)
-				sscanf(ptr + i, "{%o,%d,%d}", &numProperties[inputQuantity].value, &numProperties[inputQuantity].radix, &numProperties[inputQuantity].opSize);
+				sscanf(ptr + i, "{%o,%d,%d}", \
+				       &numProperties[inputQuantity].value, \
+				       &numProperties[inputQuantity].radix, \
+				       &numProperties[inputQuantity].opSize);
 
 			inputQuantity++;
 		}
@@ -38,18 +50,22 @@ int32_t main()
 		radix = numProperties[i].radix;
 		opSize = numProperties[i].opSize;
 
-		if ((radix != 8) && (radix != 10) && (radix != 16))  //To check the radix
+		if ((radix != 8) && (radix != 10) && (radix != 16))
 		{
-			printf("Error: The Radix value is not acceptable for the input {%d %d %d}\n", value, radix, opSize);
-			printf("The radix should be 8, 10 or 16, and the input radix is %d\n", radix);
+			printf("Error: The Radix value is not acceptable for the input "
+			       "{%d %d %d}\n", value, radix, opSize);
+			printf("The radix should be 8, 10 or 16, and the input radix is "
+			       "%d\n", radix);
 			error = true;
 			printf("\n");
 		}
 
-		if ((opSize != 4) && (opSize != 8) && (opSize != 16))  //To check the opsize
+		if ((opSize != 4) && (opSize != 8) && (opSize != 16))
 		{
-			printf("Error: The Operand Size is not acceptable for the input {%d %d %d}\n", value, radix, opSize);
-			printf("The operand size should be 4, 8 or 16, and the input operand size is %d\n", opSize);
+			printf("Error: The Operand Size is not acceptable for the input"
+			       " {%d %d %d}\n", value, radix, opSize);
+			printf("The operand size should be 4, 8 or 16, and the input"
+			       "operand size is %d\n", opSize);
 			error = true;
 			printf("\n");
 		}
@@ -83,11 +99,12 @@ void printAllOutputs(void)
 	}
 	min = 0;
 	//print Ouptut header
-	printf("Input:  Value %d \t Radix %d \t Operand Size %d\n", value, radix, opSize);
+	printf("Input:  Value %d \t Radix %d \t Operand Size %d\n",
+	       value, radix, opSize);
 
 	int32_t maxUnsignedVal = pow(2, opSize);
 
-	if ( value <=  maxUnsignedVal)                          // To check if value is out of range for absolute outputs
+	if ( value <=  maxUnsignedVal)
 	{
 		if (opSize == 4)
 			printf("Output: \t\tValue \t\tMaximum \tMinimum\n");
@@ -122,18 +139,24 @@ void printAllOutputs(void)
 		int32_t maxOpValue = (pow(2, opSize) / 2) - 1;
 		int32_t minOpValue = (pow(2, opSize) / 2) * -1;
 
-		if (value > maxOpValue) 						//To check opsize for signed outputs
+		if (value > maxOpValue)
 		{
-			printf("Error: The input value is greater than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
-			printf("The given value is %d and the maximum value for the given signed operand is %d\n", value, maxOpValue);
+			printf("Error: The input value is greater than the range for the "
+			       "given operand size of the input {%d %d %d}\n", \
+			       value, radix, opSize);
+			printf("The given value is %d and the maximum value for the given "
+			       "signed operand is %d\n", value, maxOpValue);
 			error = true;
 			printf("\n");
 		}
 
 		else if (value < minOpValue)
 		{
-			printf("Error: The input value is less than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
-			printf("The given value is %d and the minimum value for the given signed operand is %d\n", value, minOpValue);
+			printf("Error: The input value is less than the range for the "
+			       "given operand size of the input {%d %d %d}\n", \
+			       value, radix, opSize);
+			printf("The given value is %d and the minimum value for the "
+			       "given signed operand is %d\n", value, minOpValue);
 			error = true;
 			printf("\n");
 		}
@@ -149,8 +172,10 @@ void printAllOutputs(void)
 	}
 	else
 	{
-		printf("Error: The input value is greater than the range for the given operand size of the input {%d %d %d}\n", value, radix, opSize);
-		printf("The given value is %d and the maximum value for the given operand is %d\n", value, maxUnsignedVal);
+		printf("Error: The input value is greater than the range for the given "
+		       "operand size of the input {%d %d %d}\n", value, radix, opSize);
+		printf("The given value is %d and the maximum value for the given "
+		       "operand is %d\n", value, maxUnsignedVal);
 		error = true;
 		printf("\n");
 	}
