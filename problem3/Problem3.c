@@ -72,8 +72,11 @@ int32_t main()
 	
     //Reverse the byte order, print the value in hexadecimal
     printf("Reversing the byte order & printing the value in hexadecimal\n");
+    //Storing the last 8 bits in a temporary variable
     temp = input & 0xFF;
+    //Right shifting the first 8 bits to take the place of last 8 bits	
     input = input >> 8;
+    //Left shifting the temp 8 bits to left and ORing with right-shifted 8 bits
     input = input | (temp << 8);
     printf("0x%X\n", input);
     printf("\n");
