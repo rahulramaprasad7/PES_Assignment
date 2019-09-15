@@ -2,7 +2,7 @@
  * @file Problem1.c
  * @brief Soultion for the first problem of the PES project
  *
- * This is a C program takes as input astring comtaining multiple sets of
+ * This is a C program which  takes as input, a string containing multiple sets of
  * numeric values, radix, and operand sizes, and outputs a table containing
  * the following values:
  * Binary (abs)
