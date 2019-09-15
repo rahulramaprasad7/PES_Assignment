@@ -1,19 +1,67 @@
+/*
+ * @file Problem2.c
+ * @brief Soultion for the second problem of the PES project
+ *
+ * This is a C program takes as input, an array conatining a set of ASCII codes
+ * and the output of the program prints the equivalent ASCII character after segregating
+ * into the following classes:
+ * Upper Case Alphabets
+ * Lower Case Alphabets
+ * Digits
+ * Spaces
+ * Special Characters
+ * None of the above
+ *
+ * @author Rahul Ramaprasad, Prayag Milan Desai
+ * @date September 14 2019
+ * @version 1.0
+ */
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
 #include <ctype.h> 
+
 int32_t main()
 {
+<<<<<<< HEAD
+	//The input array of ASCII codes
+	char input[] = {66,114,117,99,101,32,83,97,121,30,115,32,72,105,33,7,9,50,48,49,57,30};
+	
+	//The look-up table made to segregate special characters (http://www.asciitable.com/ for checking ASCII range)
+	char lookUpTableSpecial[] = {33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,58,59,60,61,62,63,64,91,92,93,94,95,96,123,124,15,126}; 
+	
+=======
 	char input[] = {66,114,117,99,101,32,83,97,121,30,115,32,72,105,33,7,9,50, \
                     48,49,57,30};
 
 	char lookUpTableSpecial[] = {33,34,35,36,37,38,39,40,41,42,43,44,45,46,47, \
                                  58,59,60,61,62,63,64,91,92,93,94,95,96,123, \
                                  124,15,126}; //http://www.asciitable.com/ for checking ASCII range
+>>>>>>> 4d4f83cde0d82819ce7e26a29a8388e06495ae19
 	int32_t i,j;
+	
+	//Boolean variable used to check if the code is special character or if it does not fall under any category
 	bool check = true;
+	
 	for( i = 0; i < (sizeof(input)/sizeof(char)); i++)
 	{
+<<<<<<< HEAD
+		//To check if the input Character is Upper Case Alphabet
+		if( isupper( input[i] ) )  
+			printf("Code: %d 	Type:Upper Case 	ASCII Char: %c\n",input[i],input[i]);
+		
+		//To check if the input Character is Lower Case Alphabet
+		else if( islower( input[i] ) )  
+			printf("Code: %d 	Type:Lower Case		ASCII Char: %c\n",input[i],input[i]);
+			
+		//To check if the input Character is Digit	
+		else if( isdigit( input[i] ) )  
+			printf("Code: %d 	Type:Digit		ASCII Char: %c\n",input[i],input[i]);
+		
+		//To check if the input Character is a Space and 8 is the ASCII code for backspace
+		else if( isspace(input[i]) || (input[i] == 8) )  
+			printf("Code: %d 	Type:Space		ASCII Char: %c\n",input[i],input[i]);
+=======
 		if( isupper( input[i] ) )  //To check if the input Character is Upper Case Alphabet
 			printf("Code: %d 	Type:Upper Case 	"
 				   "ASCII Char: %c\n",input[i],input[i]);
@@ -29,8 +77,10 @@ int32_t main()
 		else if( isspace(input[i]) || (input[i] == 8) )  //To check if the input Character is a Space and 8 is ASCII code for backspace
 			printf("Code: %d 	Type:Space		"
 				   "ASCII Char: %c\n",input[i],input[i]);
+>>>>>>> 4d4f83cde0d82819ce7e26a29a8388e06495ae19
 		
-		else if( check )  //To check if the input character is special 
+		//To check if the input character is special using the look-up table
+		else if( check )  
 		{	
 			for ( j = 0; j < (sizeof(lookUpTableSpecial)/sizeof(char)); j++) 
 			{	
@@ -41,13 +91,21 @@ int32_t main()
 					check = true;
 					break;
 				}
-				check = false;  //If the input character is not special, keep the check false to execute else 
+				
+				//If the input character is not special, keep the check false to execute else
+				check = false;   
 			}
 		}
 		
+<<<<<<< HEAD
+		//To check if the input character does not fall under any of the categories above
+		else 	  
+			printf("The ASCII code %d does not fall under any category\n",input[i]);
+=======
 		else 	  //To check if the input character does not fall under any of the categories above
 			printf("The ASCII code %d does not fall under any "
 				   "category\n",input[i]);
+>>>>>>> 4d4f83cde0d82819ce7e26a29a8388e06495ae19
 		
 	}
 	return 0;
