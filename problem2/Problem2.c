@@ -27,13 +27,13 @@ int32_t main()
 	
 	//The input array of ASCII codes
 	char input[] = {66,114,117,99,101,32,83,97,121,115,32,72,105,33,7,9,50,48, \
-					49,57};
+		        49,57};
 	
 	//The look-up table made to segregate special characters 
 	//(http://www.asciitable.com/ for checking ASCII range)
 	char lookUpTableSpecial[] = {33,34,35,36,37,38,39,40,41,42,43,44,45,46,47, \
-								 58,59,60,61,62,63,64,91,92,93,94,95,96,123, \
-								 124,15,126}; 
+				     58,59,60,61,62,63,64,91,92,93,94,95,96,123, \
+				     124,15,126}; 
 	
 	//Boolean variable used to check if the code is special character or if 
 	//it does not fall under any category
@@ -87,7 +87,7 @@ int32_t main()
 		//the categories above
 		else 	  
 			printf("The ASCII code %d does not fall under any "
-				   "category\n",input[i]);
+			       "category\n",input[i]);
 	
 	}
 	return 0;
