@@ -26,8 +26,8 @@ int32_t main()
 {
 	
 	//The input array of ASCII codes
-	char input[] = {66,114,117,99,101,32,83,97,121,30,115,32,72,105,33,7,9,50, \
-					48,49,57,30};
+	char input[] = {66,114,117,99,101,32,83,97,121,115,32,72,105,33,7,9,50,48, \
+					49,57};
 	
 	//The look-up table made to segregate special characters 
 	//(http://www.asciitable.com/ for checking ASCII range)
@@ -35,14 +35,11 @@ int32_t main()
 								 58,59,60,61,62,63,64,91,92,93,94,95,96,123, \
 								 124,15,126}; 
 	
-	
-	int32_t i,j;
-	
 	//Boolean variable used to check if the code is special character or if 
 	//it does not fall under any category
 	bool check = true;
 	
-	for( i = 0; i < (sizeof(input)/sizeof(char)); i++)
+	for( int32_t i = 0; i < (sizeof(input)/sizeof(char)); i++)
 	{
 
 		//To check if the input Character is Upper Case Alphabet
@@ -69,7 +66,7 @@ int32_t main()
 		//To check if the input character is special using the look-up table
 		else if( check )  
 		{	
-			for ( j = 0; j < (sizeof(lookUpTableSpecial)/sizeof(char)); j++) 
+			for ( int32_t j = 0; j < (sizeof(lookUpTableSpecial)/sizeof(char)); j++) 
 			{	
 				if( input[i] == lookUpTableSpecial[j])
 				{
