@@ -25,18 +25,15 @@ int32_t main()
 {
 	
 	//The input array of ASCII codes
-	char input[] = {66,114,117,99,101,32,83,97,121,30,115,32,72,105,33,7,9,50,48,49,57,30};
-	
-	//The look-up table made to segregate special characters (http://www.asciitable.com/ for checking ASCII range)
-	char lookUpTableSpecial[] = {33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,58,59,60,61,62,63,64,91,92,93,94,95,96,123,124,15,126}; 
-	
-
 	char input[] = {66,114,117,99,101,32,83,97,121,30,115,32,72,105,33,7,9,50, \
-                    48,49,57,30};
-
+					48,49,57,30};
+	
+	//The look-up table made to segregate special characters 
+	//(http://www.asciitable.com/ for checking ASCII range)
 	char lookUpTableSpecial[] = {33,34,35,36,37,38,39,40,41,42,43,44,45,46,47, \
-                                 58,59,60,61,62,63,64,91,92,93,94,95,96,123, \
-                                 124,15,126}; //http://www.asciitable.com/ for checking ASCII range
+								 58,59,60,61,62,63,64,91,92,93,94,95,96,123, \
+								 124,15,126}; 
+	
 	
 	int32_t i,j;
 	
