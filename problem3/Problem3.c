@@ -53,7 +53,8 @@ int32_t main()
 
     //Test if 3 of last 4 bits are on, and print the value in binary
     printf("Are 3 of the last 4 bits on?\n");
-	//There are four possibilities where 3 of the last 4 bits are on
+    
+    //There are four possibilities where 3 of the last 4 bits are on
     if ( ((input & 0x0F) == 0x07) || ((input & 0x0F) == 0x0B) \
 	     || ((input & 0x0F) == 0x0D) || ((input & 0x0F) == 0x0E))
 	{
@@ -68,6 +69,7 @@ int32_t main()
     }
     printf("\n");
 
+	
     //Reverse the byte order, print the value in hexadecimal
     printf("Reversing the byte order & printing the value in hexadecimal\n");
     temp = input & 0xFF;
@@ -76,10 +78,12 @@ int32_t main()
     printf("0x%X\n", input);
     printf("\n");
 
+	
     //Test if 3 of last 4 bits are on, and print the value in binary
     printf("Testing if 3 of last 4 bits are on, and printing the "
            "value in binary\n");
-	//There are four possibilities where 3 of the last 4 bits are on	   
+	
+    //There are four possibilities where 3 of the last 4 bits are on	   
     if ( ((input & 0x0F) == 0x07) || ((input & 0x0F) == 0x0B) \
 	     || ((input & 0x0F) == 0x0D) || ((input & 0x0F) == 0x0E))
 	{
@@ -103,10 +107,12 @@ int32_t main()
     printf("0x%X\n", input);
     printf("\n");
 
+	
     //Test if 3 of last 4 bits are on, and print the value in binary
     printf("Testing if 3 of last 4 bits are on, and printing the "
            "value in binary\n");
-	//There are four possibilities where 3 of the last 4 bits are on	   
+	
+    //There are four possibilities where 3 of the last 4 bits are on	   
     if ( ((input & 0x0F) == 0x07) || ((input & 0x0F) == 0x0B) \
 	     || ((input & 0x0F) == 0x0D) || ((input & 0x0F) == 0x0E))
 	{
@@ -121,6 +127,7 @@ int32_t main()
     }
     printf("\n");
 
+    
     //Rotate the value by eight bits to the right, print the value in hexadecimal
     printf("Rotating the value by eight bits to the right, printing the "
            "value in hexadecimal\n");
@@ -130,6 +137,7 @@ int32_t main()
     printf("0x%X\n", input);
     printf("\n");
 
+	
     //Test if 3 of last 4 bits are on, and print the value in binary
     printf("Testing if 3 of last 4 bits are on, and printing the "
            "value in binary\n");
