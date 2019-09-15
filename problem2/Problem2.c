@@ -61,24 +61,7 @@ int32_t main()
 		//To check if the input Character is a Space and 8 is the ASCII code for backspace
 		else if( isspace(input[i]) || (input[i] == 8) )  
 			printf("Code: %d 	Type:Space		ASCII Char: %c\n",input[i],input[i]);
-
-		if( isupper( input[i] ) )  //To check if the input Character is Upper Case Alphabet
-			printf("Code: %d 	Type:Upper Case 	"
-				   "ASCII Char: %c\n",input[i],input[i]);
-		
-		else if( islower( input[i] ) )  //To check if the input Character is Lower Case Alphabet
-			printf("Code: %d 	Type:Lower Case		"
-				   "ASCII Char: %c\n",input[i],input[i]);
-			
-		else if( isdigit( input[i] ) )  //To check if the input Character is Digit
-			printf("Code: %d 	Type:Digit		"
-				   "ASCII Char: %c\n",input[i],input[i]);
-		
-		else if( isspace(input[i]) || (input[i] == 8) )  //To check if the input Character is a Space and 8 is ASCII code for backspace
-			printf("Code: %d 	Type:Space		"
-				   "ASCII Char: %c\n",input[i],input[i]);
 	
-		
 		//To check if the input character is special using the look-up table
 		else if( check )  
 		{	
@@ -101,12 +84,7 @@ int32_t main()
 		//To check if the input character does not fall under any of the categories above
 		else 	  
 			printf("The ASCII code %d does not fall under any category\n",input[i]);
-
-		else 	  //To check if the input character does not fall under any of the categories above
-			printf("The ASCII code %d does not fall under any "
-				   "category\n",input[i]);
-
-		
+	
 	}
 	return 0;
 }
