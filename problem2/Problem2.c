@@ -63,31 +63,41 @@ int32_t main()
 			printf("Code: %d 	Type:Space		"
 				   "ASCII Char: %c\n",input[i],input[i]);
 	
-		//To check if the input character is special using the look-up table
-		else if( check )  
+		else   
 		{	
-			for ( int32_t j = 0; j < (sizeof(lookUpTableSpecial)/sizeof(char)); j++) 
-			{	
-				if( input[i] == lookUpTableSpecial[j])
-				{
-					printf("Code: %d 	Type:Special		"
-						   "ASCII Char: %c\n",input[i],input[i]);
-					check = true;
-					break;
+			//To check if the input character is special using the look-up table
+			if( check )
+			{
+				for ( int32_t j = 0; j < (sizeof(lookUpTableSpecial)/sizeof(char)); j++) 
+				{	
+					if( input[i] == lookUpTableSpecial[j])
+					{
+						printf("Code: %d 	Type:Special		"
+							   "ASCII Char: %c\n",input[i],input[i]);
+						check = true;
+						break;
+					}
+
+					//If the input character is not special,
+					//keep the check false to execute else
+					check = false;   
 				}
-				
-				//If the input character is not special,
-				//keep the check false to execute else
-				check = false;   
 			}
+			
+			//To check if the input character does not fall under any of
+			//the categories above
+			if( !check )
+			{
+				printf("The ASCII code %d does not fall under any "
+			       "category\n",input[i]);
+				check=true;
+			}
+			
 		}
 		
 
-		//To check if the input character does not fall under any of
-		//the categories above
-		else 	  
-			printf("The ASCII code %d does not fall under any "
-			       "category\n",input[i]);
+		
+			
 	
 	}
 	return 0;
