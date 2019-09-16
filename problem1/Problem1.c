@@ -102,7 +102,7 @@ int32_t main()
 		{
 			printf("Error: The Operand Size is not acceptable for the input"
 			       " {%d %d %d}\n", value, radix, opSize);
-			printf("The operand size should be 4, 8 or 16, and the input"
+			printf("The operand size should be 4, 8 or 16, and the input "
 			       "operand size is %d\n", opSize);
 			error = true;						//Set error if out of bounds
 			printf("\n");
