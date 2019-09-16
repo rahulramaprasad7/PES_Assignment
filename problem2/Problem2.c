@@ -68,7 +68,8 @@ int32_t main()
 			//To check if the input character is special using the look-up table
 			if( check )
 			{
-				for ( int32_t j = 0; j < (sizeof(lookUpTableSpecial)/sizeof(char)); j++) 
+				for ( int32_t j = 0; \
+					  j < (sizeof(lookUpTableSpecial)/sizeof(char)); j++) 
 				{	
 					if( input[i] == lookUpTableSpecial[j])
 					{
