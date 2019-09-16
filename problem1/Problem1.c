@@ -2,8 +2,8 @@
  * @file Problem1.c
  * @brief Soultion for the first problem of the PES project
  *
- * This is a C program which  takes as input, a string containing multiple sets of
- * numeric values, radix, and operand sizes, and outputs a table containing
+ * This is a C program which  takes as input, a string containing multiple sets
+ * of numeric values, radix, and operand sizes, and outputs a table containing
  * the following values:
  * Binary (abs)
  * Octal (abs)
@@ -30,9 +30,11 @@ int32_t main()
 	char *stringLocationPtr = NULL;
 
 	//The input string, it's format being {value, Radix, Operand Size}
-	char input[] = "{-6, 10, 4}, {-6, 9, 4}, {-6, 10, 5}, {0xEB, 10, 4},\
-	                {237, 10, 8}, {0354, 8, 8}, {78, 16, 8}, {-125, 10, 8},\
-	                {65400, 10, 8}, {65400, 10, 16}, {-32701, 10, 16} ";
+	char input[] = "{-6, 10, 4}, {-6, 9, 4}, {-6, 10, 5}, {-9, 10, 4}, \
+	                {237, 10, 8}, {0354, 8, 8}, {0xEB, 16, 8}, {-125, 10, 8},\
+	                {65400, 10, 8}, {65400, 10, 16}, {-32701, 10, 16}";
+
+	//Point to the start of the input string                
 	stringLocationPtr = input;
 
 	//Total number of inputs extracted from the input string
