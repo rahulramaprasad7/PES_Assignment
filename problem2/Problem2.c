@@ -89,8 +89,8 @@ int32_t main()
 			//the categories above
 			if( !check )
 			{
-				printf("The ASCII code %d does not fall under any "
-			       "category\n",input[i]);
+				printf("The ASCII code %d which represents the character %c "
+					   "does not fall under any category\n",input[i], input[i]);
 				check=true;
 			}
 			
